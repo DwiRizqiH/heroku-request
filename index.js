@@ -37,7 +37,8 @@ router.get('/render', async (req, res) => {
         const resultFetchReq = await fetchReq.text()
         const randomFileGenerated = `${__dirname}/views/${GenerateSerialNumber('00000000000000000000')}.html`
         await fs.writeFileSync(randomFileGenerated, resultFetchReq)
-        return res.render(randomFileGenerated.replace(`${__dirname}/views/`, ''))
+        await res.render(randomFileGenerated.replace(`${__dirname}/views/`, ''))
+        fs.unlinkSync(randomFileGenerated)
     } catch (err) {
         console.log(err)
         return res.status(503).send({ error: true, msg: '503!' })
