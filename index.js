@@ -45,7 +45,7 @@ router.get('/render', async (req, res) => {
 })
 
 app.use('/', router)
-app.set('port', (5723))
+app.set('port', (80))
 app.listen(app.get('port'), () => {
     console.log('App Started on PORT', app.get('port'))
 })
