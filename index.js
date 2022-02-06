@@ -19,7 +19,7 @@ router.get('/request', async (req, res) => {
     try {
         const fetchReq = await fetch(req.query.url)
         const resultFetchReq = await fetchReq.text()
-        return res.send({ error: false, data: resultFetchReq })
+        return res.send(resultFetchReq)
     } catch (err) {
         console.log(err)
         return res.status(503).send({ error: true, msg: '503!' })
