@@ -1,0 +1,25 @@
+{
+  "name": "heroku-request",
+  "version": "1.0.0",
+  "description": "Make a URL request from heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DwiRizqiH/heroku-request.git"
+  },
+  "author": "DwiRizqiH",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/DwiRizqiH/heroku-request/issues"
+  },
+  "homepage": "https://github.com/DwiRizqiH/heroku-request#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "fs-extra": "^10.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}
