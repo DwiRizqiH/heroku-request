@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/DwiRizqiH/heroku-request#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
-    "fs-extra": "^10.0.0",
-    "node-fetch": "^2.6.7"
+    "fs-extra": "^10.0.0"
   }
 }
