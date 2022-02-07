@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const axios = require('axios')
 const express = require('express')
 const fs = require('fs-extra')
 const app = express()
@@ -17,9 +17,13 @@ router.get('/request', async (req, res) => {
     if(req.query.key != process.env.keyAccess) return res.status(403).send({ error: true, msg: '403!' })
     if(!isUrl(req.query.url)) return res.send({ error: true, msg: 'invalidUrl' })
     try {
-        const fetchReq = await fetch(req.query.url)
-        const resultFetchReq = await fetchReq.text()
-        return res.send(resultFetchReq)
+        if(req.query.type != undefined && req.query.type == 'image') {
+            const fetchReq = await axios.get(req.query.url, { responseType: 'arraybuffer' })
+            return res.send(fetchReq.data)
+        } else {
+            const fetchReq = await axios.get(req.query.url)
+            return res.send(fetchReq.data)
+        }
     } catch (err) {
         console.log(err)
         return res.status(503).send({ error: true, msg: '503!' })
@@ -33,10 +37,9 @@ router.get('/render', async (req, res) => {
     if(req.query.key != process.env.keyAccess) return res.status(403).send({ error: true, msg: '403!' })
     if(!isUrl(req.query.url)) return res.send({ error: true, msg: 'invalidUrl' })
     try {
-        const fetchReq = await fetch(req.query.url)
-        const resultFetchReq = await fetchReq.text()
+        const fetchReq = await axios.get(req.query.url)
         const randomFileGenerated = `${__dirname}/views/${GenerateSerialNumber('00000000000000000000')}.html`
-        await fs.writeFileSync(randomFileGenerated, resultFetchReq)
+        await fs.writeFileSync(randomFileGenerated, fetchReq.data)
         await res.render(randomFileGenerated.replace(`${__dirname}/views/`, ''))
         fs.unlinkSync(randomFileGenerated)
     } catch (err) {
